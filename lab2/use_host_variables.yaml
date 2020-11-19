@@ -1,0 +1,23 @@
+---
+  - name: use host variables
+    hosts: all
+    vars_files:
+      - vars/vars_users.yml
+    tasks:
+      - name: use debug command to check if the variable is available
+        debug:
+          msg: "testing hosting variables {{web_package}} "
+      - name: install httpd package
+        package:
+          name: '{{web_package}}'
+          state: latest
+      - name: enable and start httpd package
+        service:
+          name: '{{web_package}}'
+          enabled: yes
+          state: started
+      - name: creating users from variable files
+        user:
+          name: "{{item.username}}"
+          shell: "{{item.shell}}"
+        loop: "{{users}}"

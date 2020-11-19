@@ -1,0 +1,6 @@
+users:
+  - username: rayan
+    shell: /bin/bash
+
+  - username: anis
+    shell: /bin/bash
