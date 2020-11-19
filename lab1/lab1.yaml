@@ -1,0 +1,33 @@
+---
+- name: install httpd + firewall opening
+  gather_facts: no
+  hosts: all
+  tasks:
+    - name: install httpd
+      yum:
+        name: httpd
+        state: present
+    - name: start httpd
+      service:
+        name: httpd
+        state: started
+        enabled: yes
+    - name: install firewalld
+      yum:
+        name: firewalld
+        state: latest
+    - name: start firewall service
+      service:
+        name: firewalld
+        state: started
+        enabled: yes
+    - name: enable http on firewalld
+      firewalld:
+        service: http
+        permanent: yes
+        state: enabled
+        immediate: yes
+    - name: create file
+      copy:
+        content: hello ansible
+        dest: var/www/html/index.html

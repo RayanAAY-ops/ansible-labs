@@ -1,0 +1,19 @@
+---
+- name: undo the lab1
+  gather_facts: no
+  hosts: all
+  tasks:
+    - name: deinstall httpd
+      yum:
+        name: httpd
+        state: absent
+    - name: remove firewalld for httpd support
+      firewalld:
+        service: http
+        permanent: no
+        state: disabled
+    - name: delete file /var/www/html/index.html
+      file:
+        path: /var/www/html/index.html
+        state: absent
+   
