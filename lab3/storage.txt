@@ -1,0 +1,2 @@
+{'ansible_facts.hostname': 'ip-172-31-92-117', 'failed': False, 'changed': False}
+{'ansible_facts.hostname': 'ip-172-31-42-125', 'failed': False, 'changed': False}
