@@ -1,0 +1,22 @@
+---
+- name: lab3
+  hosts: all
+  tasks:
+    - name: create file
+      file:
+        path: ./storage.txt
+        state: touch
+      delegate_to: localhost
+
+    - name: debug module
+      debug:
+        var: ansible_facts.hostname 
+      register: debug_output
+
+    - name: create file with content
+      lineinfile: 
+        path: ./storage.txt
+        line: "{{debug_output}}"
+        insertbefore: BOF
+      delegate_to: localhost
+
