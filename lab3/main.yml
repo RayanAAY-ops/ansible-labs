@@ -1,7 +1,11 @@
 ---
 - name: lab3
   hosts: all
+  vars:
+    remote_dir : /etc/ansible/facts.d
+    facts_file : localfacts.fact
   tasks:
+
     - name: create file
       file:
         path: ./storage.txt
@@ -20,3 +24,14 @@
         insertbefore: BOF
       delegate_to: localhost
 
+    - name: create facts.d directory
+      file:
+        state: directory
+        recurse: yes
+        path : "{{remote_dir}}"
+
+    - name: install custom facts
+      copy:
+        src: "{{facts_file}}"
+        dest: "{{remote_dir}}"
+      

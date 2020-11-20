@@ -1,0 +1,4 @@
+[localfacts]
+package = firewalld
+service = firewalld
+state = stopped
